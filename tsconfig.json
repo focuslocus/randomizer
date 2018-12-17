@@ -1,0 +1,24 @@
+{
+    "compileOnSave": true,
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "lib": [
+            "es5",
+            "es6",
+            "dom"
+        ],
+        "module": "commonjs",
+        "target": "es5",
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "outDir": "dist",
+        "jsx": "react",
+        "types": ["node", "jest"]
+    },
+    "include": [
+        "src/types/*",
+        "src/server/*",
+        "./webpack.config.ts"
+    ]
+}
