@@ -6,13 +6,13 @@ import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
 
 const app: express.Application = express();
-
+const env = process.env.NODE_ENV;
 // Middleware
-if (process.env.NODE_ENV !== 'production') {
+if (env !== 'production') {
   const webpack = require('webpack');
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webpackHotMiddleware = require('webpack-hot-middleware');
-  const config = require('../../webpack.config');
+  const config = require('../../webpack.config')(env);
   const compiler = webpack(config);
 
   app.use(webpackDevMiddleware(compiler, { publicPath: config.output.publicPath }));

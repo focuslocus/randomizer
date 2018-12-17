@@ -5,10 +5,10 @@ import HtmlWebpackPlugin = require('html-webpack-plugin');
 import WorkboxPlugin = require('workbox-webpack-plugin');
 import ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
-const config = function (env: any): webpack.Configuration {
+module.exports = function(env?: any): webpack.Configuration {
   const entryArray: string[] = ['./src/app/index.tsx'];
 
-  if (!env.production) entryArray.push('webpack-hot-middleware/client?path=/__hmr&reload=true&timeout=2000')
+  if (env && !env.production) entryArray.push('webpack-hot-middleware/client?path=/__hmr&reload=true&timeout=2000');
 
   return {
     entry: entryArray,
@@ -48,16 +48,12 @@ const config = function (env: any): webpack.Configuration {
       new webpack.NamedModulesPlugin(),
       new webpack.HotModuleReplacementPlugin(),
       new HtmlWebpackPlugin({
-        title: 'React / Node Boilerplate',
+        title: 'Randomizer',
         template: './src/app/assets/index.html',
         favicon: './src/app/assets/favicon.png',
-        inject: 'body',
-        files: {
-          js: ['dist/app.bundle.js'],
-          css: ['semantic/semantic.min.css']
-        }
+        inject: 'body'
       }),
-      new WebpackPwaManifest({
+      new WebpackPwaManifest({ 
         'short_name': 'PWA',
         'name': 'PWA Starter',
         'icons': [
@@ -87,5 +83,3 @@ const config = function (env: any): webpack.Configuration {
     }
   };
 };
-
-export default config;
