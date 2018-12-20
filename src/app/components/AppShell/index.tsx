@@ -2,14 +2,12 @@ import * as React from 'react';
 import { createStyles, withStyles, WithStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
 import withRoot from '../WithRoot';
+import OptionsList from '../OptionsList';
 
 const styles = createStyles({
   root: {
@@ -43,11 +41,8 @@ class AppShellBase extends React.Component<WithStyles<typeof styles>, {}> {
       <div>
         <AppBar position='static'>
           <Toolbar>
-            <IconButton className={classes.menuButton} color='inherit' aria-label='Menu'>
-              <MenuIcon />
-            </IconButton>
             <Typography variant='title' color='inherit' className={classes.grow}>
-              PWA App Shell
+              Randomizer
             </Typography>
             <Button onClick={(event: React.MouseEvent<HTMLElement>) => this.showNotification()} color='inherit'>Notify</Button>
           </Toolbar>
@@ -55,7 +50,7 @@ class AppShellBase extends React.Component<WithStyles<typeof styles>, {}> {
         <Grid container>
           <Grid item xs={12}>
             <Grid container justify={'center'}>
-              <CircularProgress className={classes.spinner} />
+              <OptionsList></OptionsList>
             </Grid>
           </Grid>
         </Grid>
@@ -63,6 +58,6 @@ class AppShellBase extends React.Component<WithStyles<typeof styles>, {}> {
 
     );
   }
-};
+}
 
 export const AppShellComponent = withRoot(withStyles(styles, { withTheme: true })(AppShellBase));
