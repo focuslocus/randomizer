@@ -37,6 +37,7 @@ module.exports = function(env?: any): webpack.Configuration {
               ],
               plugins: [
                 'react-hot-loader/babel',
+                'transform-class-properties'
               ]
             }
           }
