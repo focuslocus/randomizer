@@ -8,9 +8,12 @@ import ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 module.exports = function(env?: any): webpack.Configuration {
   const entryArray: string[] = ['./src/app/index.tsx'];
 
-  if (env && !env.production) entryArray.push('webpack-hot-middleware/client?path=/__hmr&reload=true&timeout=2000');
+  const isProd = env && env.production
+
+  if (isProd) entryArray.push('webpack-hot-middleware/client?path=/__hmr&reload=true&timeout=2000');
 
   return {
+    mode: isProd ? 'production' : 'development',
     entry: entryArray,
     output: {
       path: __dirname,
@@ -54,7 +57,7 @@ module.exports = function(env?: any): webpack.Configuration {
         favicon: './src/app/assets/favicon.png',
         inject: 'body'
       }),
-      new WebpackPwaManifest({ 
+      new WebpackPwaManifest({
         'short_name': 'PWA',
         'name': 'PWA Starter',
         'icons': [
