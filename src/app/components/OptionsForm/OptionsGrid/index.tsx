@@ -1,45 +1,60 @@
 import * as React from 'react';
-import Chip from '@material-ui/core/Chip';
-import Grid from '@material-ui/core/Grid';
-import { Divider } from '@material-ui/core';
+import {
+  createStyles,
+  withStyles,
+  Chip,
+  Grid,
+  WithStyles
+} from '@material-ui/core';
+import { classicNameResolver } from 'typescript';
 
-interface OptionsListProps {
+const styles = createStyles({
+  chips: {
+    margin: '0px 10px'
+  }
+});
+interface OptionsListProps extends WithStyles<typeof styles> {
     deleteHandler: (option: string) => void;
     options: [][];
 }
 
 const OptionsGrid: React.SFC<OptionsListProps> = (props) => {
-    console.log(props)
     // takes in a matrix, max length of a row is 3
     // loop over - check for odd or even and render/offset based on that (toggle classes)
     if (props.options.length === 0) {
         return (<div>Add some options!</div>);
     }
+    const { classes } = props;
+
     return (
-        <Grid container spacing={24} direction='row' alignItems='center' justify='space-between'>
+        <Grid
+          container
+          spacing={24}
+          direction='column'
+          alignItems='center'
+          justify='space-evenly'>
             {props.options.map((row: [], index: number) => {
                 // index % 2 === 0 ?
                 return (
-                    <Grid item
-                        direction='row'
-                        justify='space-evenly'
-                        alignItems='center'>
-                        {row.map((option: string) => {
-                            return (
-                                <Grid item>
-                                    <Chip
-                                        label={option}
-                                        variant='outlined'
-                                        onDelete={() => props.deleteHandler(option)}
-                                    />
-                                </Grid>
-                            );
-                        })}
-                    </Grid>
+                  <Grid
+                      item
+                      key={index}>
+                    {row.map((option: string, index: number) => {
+                        return (
+                          <Chip
+                              key={index}
+                              className={classes.chips}
+                              label={option}
+                              variant='outlined'
+                              onDelete={() => props.deleteHandler(option)}
+                          />
+                        );
+                    })}
+                  </Grid>
                 );
             })}
         </Grid>
     );
 };
 
-export default OptionsGrid;
+export const OptionsGridComponent = withStyles(styles)(OptionsGrid);
