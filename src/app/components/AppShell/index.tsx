@@ -1,13 +1,15 @@
 import * as React from 'react';
-import { createStyles, withStyles, WithStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-
-import withRoot from '../WithRoot';
-import OptionsForm from '../OptionsForm';
+import {
+  createStyles,
+  withStyles,
+  WithStyles,
+  AppBar,
+  Button,
+  Grid,
+  Toolbar,
+  Typography
+} from '@material-ui/core';
+import { OptionsFormComponent } from '../OptionsForm';
 
 const styles = createStyles({
   root: {
@@ -15,10 +17,6 @@ const styles = createStyles({
   },
   grow: {
     flexGrow: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
   },
   spinner: {
     marginTop: 50
@@ -49,7 +47,7 @@ class AppShellBase extends React.Component<WithStyles<typeof styles>, {}> {
         <Grid container>
           <Grid item xs={12}>
             <Grid container justify={'center'}>
-              <OptionsForm/>
+              <OptionsFormComponent/>
             </Grid>
           </Grid>
         </Grid>
@@ -59,4 +57,4 @@ class AppShellBase extends React.Component<WithStyles<typeof styles>, {}> {
   }
 }
 
-export const AppShellComponent = withRoot(withStyles(styles, { withTheme: true })(AppShellBase));
+export const AppShellComponent = withStyles(styles)(AppShellBase);
