@@ -7,7 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
 import withRoot from '../WithRoot';
-import OptionsList from '../OptionsList';
+import OptionsForm from '../OptionsForm';
 
 const styles = createStyles({
   root: {
@@ -44,13 +44,12 @@ class AppShellBase extends React.Component<WithStyles<typeof styles>, {}> {
             <Typography variant='title' color='inherit' className={classes.grow}>
               Randomizer
             </Typography>
-            <Button onClick={(event: React.MouseEvent<HTMLElement>) => this.showNotification()} color='inherit'>Notify</Button>
           </Toolbar>
         </AppBar>
         <Grid container>
           <Grid item xs={12}>
             <Grid container justify={'center'}>
-              <OptionsList></OptionsList>
+              <OptionsForm/>
             </Grid>
           </Grid>
         </Grid>
