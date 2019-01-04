@@ -28,6 +28,7 @@ interface OptionsFormState {
     current: string;
     selected: string;
     modalOpen: boolean;
+    numOfOptions: number;
 }
 
 class OptionsForm extends React.Component<any, any> {
@@ -37,7 +38,8 @@ class OptionsForm extends React.Component<any, any> {
             options: [[]],
             current: '',
             selected: '',
-            modalOpen: false
+            modalOpen: false,
+            numOfOptions: 0
         };
 
         this.state = state;
