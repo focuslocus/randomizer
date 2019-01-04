@@ -51,21 +51,30 @@ class OptionsForm extends React.Component<any, any> {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        const { options } = this.state;
-        const { current: optionToAdd } = this.state;
+        const { options, current: optionToAdd, numOfOptions } = this.state;
         let lastOptionsRow = options[options.length - 1];
 
         if (lastOptionsRow.length < 3) {
-          lastOptionsRow = lastOptionsRow.push(optionToAdd);
+            lastOptionsRow = lastOptionsRow.push(optionToAdd);
         } else {
-          options.push([optionToAdd]);
+            options.push([optionToAdd]);
         }
-        this.setState(() => ({ options, current: '' }));
+        this.setState(() => ({ options, current: '', numOfOptions: numOfOptions + 1 }));
     }
 
-    handleDelete = (value: string): void => {
-        const newOptionsList = this.state.options.filter(item => item !== value);
-        this.setState({ options: newOptionsList });
+    handleDelete = (valueToDelete: string): void => {
+        const { options: matrix, numOfOptions } = this.state;
+        const newOptionsList = matrix.reduce((updatedMatrix, currentRow, currentRowIndex) => {
+            matrix[currentRowIndex].forEach((option) => {
+                const matrixLength = updatedMatrix.length - 1;
+                if (option !== valueToDelete) {
+                    updatedMatrix[matrixLength].length > 2 ? updatedMatrix.push([option]) : updatedMatrix[matrixLength].push(option);
+                }
+            });
+            return updatedMatrix;
+
+        }, [[]]);
+        this.setState({ options: newOptionsList, numOfOptions: numOfOptions - 1 });
     }
 
     handleGenerate = () => {
