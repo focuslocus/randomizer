@@ -58,8 +58,8 @@ module.exports = function(env?: any): webpack.Configuration {
         inject: 'body'
       }),
       new WebpackPwaManifest({
-        'short_name': 'PWA',
-        'name': 'PWA Starter',
+        'short_name': 'Randomizer',
+        'name': 'Randomizer',
         'icons': [
           {
             'src': './src/app/assets/homescreen_icon_192.png',
@@ -70,7 +70,7 @@ module.exports = function(env?: any): webpack.Configuration {
             'size': '512x512'
           }
         ],
-        'start_url': '/?source=pwa',
+        'start_url': '/?source=randomizer',
         'background_color': '#008B8B',
         'display': 'standalone',
         'scope': '/',
