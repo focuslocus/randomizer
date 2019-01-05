@@ -20,6 +20,20 @@ const styles = createStyles({
         marginLeft: '10px',
         height: '40px',
         width: '40px'
+    },
+    modal: {
+        position: 'absolute',
+        height: '100px',
+        width: '250px',
+        backgroundColor: 'white',
+        boxShadow: '10px',
+        padding: '10px',
+        outline: 'none',
+        top: '50%',
+        left: '50%',
+        margin: '0 auto',
+        marginLeft: '-125px',
+        marginTop: '-50px'
     }
 });
 
@@ -43,6 +57,10 @@ class OptionsForm extends React.Component<any, any> {
         };
 
         this.state = state;
+    }
+
+    closeModal = () => {
+        this.setState({ modalOpen: false });
     }
 
     handleInput = (event) => {
@@ -78,8 +96,9 @@ class OptionsForm extends React.Component<any, any> {
     }
 
     handleGenerate = () => {
+        const combinedOptions = this.state.options.reduce((flattened, optionRow) => flattened.concat(optionRow), []);
         this.setState((state) => ({
-            selected: state.options[Math.floor(Math.random() * state.options.length)],
+            selected: combinedOptions[Math.floor(Math.random() * combinedOptions.length)],
             modalOpen: true
         }));
     }
@@ -114,9 +133,11 @@ class OptionsForm extends React.Component<any, any> {
                         Generate
                 </Fab>
                 </Grid>
-                <Modal open={this.state.modalOpen}>
-                    <div>
-                        <Typography variant='h3'>
+                <Modal
+                    open={this.state.modalOpen}
+                    onClose={this.closeModal}>
+                    <div className={classes.modal}>
+                        <Typography variant='h6'>
                             {`Congrats: you've been presented with ${this.state.selected}`}
                         </Typography>
                     </div>
