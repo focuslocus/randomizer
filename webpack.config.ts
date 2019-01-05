@@ -8,9 +8,9 @@ import ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 module.exports = function(env?: any): webpack.Configuration {
   const entryArray: string[] = ['./src/app/index.tsx'];
 
-  const isProd = env && env.production
+  const isProd = env && env.production;
 
-  if (isProd) entryArray.push('webpack-hot-middleware/client?path=/__hmr&reload=true&timeout=2000');
+  if (!isProd) entryArray.push('webpack-hot-middleware/client?path=/__hmr&reload=true&timeout=2000');
 
   return {
     mode: isProd ? 'production' : 'development',
