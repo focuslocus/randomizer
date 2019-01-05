@@ -6,7 +6,6 @@ import {
   Grid,
   WithStyles
 } from '@material-ui/core';
-import { classicNameResolver } from 'typescript';
 
 const styles = createStyles({
   chips: {
@@ -19,8 +18,6 @@ interface OptionsListProps extends WithStyles<typeof styles> {
 }
 
 const OptionsGrid: React.SFC<OptionsListProps> = (props) => {
-    // takes in a matrix, max length of a row is 3
-    // loop over - check for odd or even and render/offset based on that (toggle classes)
     if (props.options.length === 0) {
         return (<div>Add some options!</div>);
     }
@@ -34,7 +31,6 @@ const OptionsGrid: React.SFC<OptionsListProps> = (props) => {
           alignItems='center'
           justify='space-evenly'>
             {props.options.map((row: [], index: number) => {
-                // index % 2 === 0 ?
                 return (
                   <Grid
                       item
