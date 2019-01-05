@@ -1,7 +1,7 @@
 {
-  "name": "pwa_starter",
+  "name": "randomizer",
   "version": "0.0.0",
-  "description": "TODO | Product Tag Line",
+  "description": "Cure your indecision",
   "main": "index.js",
   "scripts": {
     "predev": "rm -rf dist && mkdir dist && yarn run build:dev",
