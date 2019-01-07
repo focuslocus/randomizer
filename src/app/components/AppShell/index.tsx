@@ -20,6 +20,12 @@ const styles = createStyles({
   },
   spinner: {
     marginTop: 50
+  },
+  showA2hs: {
+    display: 'block'
+  },
+  noShowA2hs: {
+    display: 'none'
   }
 });
 
@@ -35,6 +41,7 @@ class AppShellBase extends React.Component<WithStyles<typeof styles>, {}> {
 
   render(): React.ReactNode {
     const { classes } = this.props;
+    const { showA2HS } = this.state;
     return (
       <div>
         <AppBar position='static'>
