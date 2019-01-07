@@ -29,7 +29,45 @@ const styles = createStyles({
   }
 });
 
-class AppShellBase extends React.Component<WithStyles<typeof styles>, {}> {
+interface AppShellState {
+  showA2HS: boolean;
+  deferredPrompt: any;
+}
+
+class AppShellBase extends React.Component<WithStyles<typeof styles>, AppShellState> {
+  constructor (props) {
+    super(props);
+    const state: AppShellState = {
+      showA2HS: false,
+      deferredPrompt: null
+    };
+
+    this.state = state;
+  }
+
+  componentDidMount() {
+    window.addEventListener('beforeinstallprompt', (e) => {
+      console.log('before install happened')
+      e.preventDefault();
+      this.setState({ showA2HS: true, deferredPrompt: e });
+    });
+  }
+
+  a2hsHandler = (): void => {
+    console.log('handler clicked', this.state)
+    if (this.state.deferredPrompt) {
+      this.state.deferredPrompt.prompt();
+      this.state.deferredPrompt.userChoice
+        .then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted the A2HS prompt');
+          } else {
+            console.log('User dismissed the A2HS prompt');
+          }
+          this.setState({ deferredPrompt: null });
+        });
+    }
+  }
 
   showNotification(): void {
     if (Notification.permission == 'granted') {
