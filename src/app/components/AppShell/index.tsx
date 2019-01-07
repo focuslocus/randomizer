@@ -4,11 +4,11 @@ import {
   withStyles,
   WithStyles,
   AppBar,
-  Button,
   Grid,
   Toolbar,
   Typography
 } from '@material-ui/core';
+import { AddToQueue } from '@material-ui/icons';
 import { OptionsFormComponent } from '../OptionsForm';
 
 const styles = createStyles({
@@ -47,12 +47,12 @@ class AppShellBase extends React.Component<WithStyles<typeof styles>, {}> {
         <Grid container>
           <Grid item xs={12}>
             <Grid container justify={'center'}>
-              <OptionsFormComponent/>
+              <OptionsFormComponent />
+              <AddToQueue id='a2hs' onClick={this.a2hsHandler} className={showA2HS ? classes.showA2hs : classes.noShowA2hs} />
             </Grid>
           </Grid>
         </Grid>
       </div>
-
     );
   }
 }
