@@ -12,5 +12,11 @@ TODO:
 - [ ] Revisit types, add necessary typing
 - [ ] Clear all functionality
 - [ ] Hosting
-- [ ] Mobile reponsiveness (for grid)
+- [ ] Mobile responsiveness (for grid)
 - [ ] Tooltip walkthrough
+- [ ] Form Sanitation
+
+Feature Roadmap
+
+- Collections (Option for randomness or weighted randomness)
+- Users (Explore out-of-box solutions: firebase, aws cognito)
