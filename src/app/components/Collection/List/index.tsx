@@ -10,27 +10,28 @@ import CollectionListInput from './Input';
 import CollectionListItem from './Item';
 
 const CollectionList = (props: any) => {
-    const { classes, onDeleteItem, onItemInput } = props;
+    const { items, onDeleteItem, onItemInput } = props;
     return (
+        <Grid
+            container
+            justify='space-evenly'>
+            <CollectionListInput onItemInput={onItemInput} />
             <Grid
                 container
+                spacing={24}
+                direction='column'
+                alignItems='center'
                 justify='space-evenly'>
-                <CollectionListInput onItemInput={onItemInput} />
-                <Grid
-                    container
-                    spacing={24}
-                    direction='column'
-                    alignItems='center'
-                    justify='space-evenly'>
-                        {props.items.map((item: string, index: number) => {
-                            <CollectionListItem
-                                key={index}
-                                item={item}
-                                onDeleteItem={props.onDeleteItem} />
-                        })}
-                    </Grid>
-                </Grid>
-    )
+                    {items.map((item: string, index: number) => {
+                        return (<CollectionListItem
+                            key={index}
+                            item={item}
+                            onDeleteItem={onDeleteItem} />
+                        );
+                    })}
+            </Grid>
+        </Grid>
+    );
 };
 
-export default withStyles(styles)(CollectionList);
+export default CollectionList;

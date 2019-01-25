@@ -6,32 +6,33 @@ import {
     Grid,
     Input
 } from '@material-ui/core';
-import AddIcon from '@material-ui/icons';
-import Row from '../../shared/Row';
+import AddIcon from '@material-ui/icons/Add';
+import sharedStyles from '../../common/Css';
 
 const styles = createStyles({
     addFab: {
         marginLeft: '10px',
         height: '40px',
         width: '40px'
-    }
+    },
+    formRow: sharedStyles.formRow
 });
 
 const CollectionListInput = (props: any) => {
     const { classes, onItemInput, onSubmit } = props;
     return (
-        <Row>
-            <form onSubmit={this.handleSubmit}>
+        <Grid item className={classes.formRow}>
+            <form>
                 <Input type='text'
                     placeholder='Add an option here...'
-                    value={this.state.current}
-                    onChange={this.handleInput} />
-                <Fab className={props.classes.addFab}
+                    value=''
+                    onChange={onItemInput} />
+                <Fab className={classes.addFab}
                     type='submit'>
                     <AddIcon />
                 </Fab>
             </form>
-        </Row>
+        </Grid>
     );
 };
 

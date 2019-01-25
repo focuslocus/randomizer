@@ -10,6 +10,7 @@ import {
     Typography
 } from '@material-ui/core';
 import CollectionList from './List';
+import CollectionPicker from './Picker';
 
 const styles = createStyles({});
 
@@ -18,8 +19,11 @@ const options = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight',
 class Collection extends React.Component <any, any> {
     public constructor(props) {
         super(props);
-
         // TODO add items list to state here
+    }
+
+    handleAddItem = (item: string): void => {
+
     }
 
     handleDeleteItem = (item: string): void => {
@@ -34,8 +38,10 @@ class Collection extends React.Component <any, any> {
     public render() {
         return (
             <div>
-                <CollectionList items={options} onDeleteItem={this.handleDeleteItem} />
-                <CollectionPickerComponent items={options} onItemInput={this.handleItemInput} />
+                <CollectionList items={options}
+                    onDeleteItem={this.handleDeleteItem}
+                    onItemInput={this.handleItemInput} />
+                <CollectionPicker items={options} />
             </div>
         );
     }

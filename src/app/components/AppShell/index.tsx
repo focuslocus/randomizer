@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core';
 import { AddToQueue } from '@material-ui/icons';
 import { OptionsFormComponent } from '../OptionsForm';
+import Collection from '../Collection';
 
 const styles = createStyles({
   root: {
@@ -92,7 +93,8 @@ class AppShellBase extends React.Component<WithStyles<typeof styles>, AppShellSt
         <Grid container>
           <Grid item xs={12}>
             <Grid container justify={'center'}>
-              <OptionsFormComponent />
+              {/** <OptionsFormComponent />*/}
+              <Collection />
               <AddToQueue id='a2hs' onClick={this.a2hsHandler} className={showA2HS ? classes.showA2hs : classes.noShowA2hs} />
             </Grid>
           </Grid>
