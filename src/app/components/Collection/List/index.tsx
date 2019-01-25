@@ -14,7 +14,7 @@ const styles = createStyles({
 });
 
 const CollectionList = (props: any) => {
-    const { items, onDeleteItem, onItemInput, classes } = props;
+    const { items, onDeleteItem, onItemInput, onAddItem, classes, current } = props;
     const listComponents = items.reduce((updateditems, currentItem, currentItemIndex) => {
         const itemsLength = updateditems.length - 1;
         const itemComponent = <CollectionListItem
@@ -28,7 +28,9 @@ const CollectionList = (props: any) => {
     return (
         <Grid container
             justify='space-evenly'>
-            <CollectionListInput onItemInput={onItemInput} />
+            <CollectionListInput onItemInput={onItemInput}
+                onAddItem={onAddItem}
+                current={current}/>
             <Grid container
                 spacing={24}
                 direction='column'
@@ -37,8 +39,7 @@ const CollectionList = (props: any) => {
                 {listComponents.map((row: string, index: number) => {
                     return (
                         <Grid item
-                            key={index}
-                            className={classes.formRow}>
+                            key={index}>
                                 {row}
                         </Grid>
                     );

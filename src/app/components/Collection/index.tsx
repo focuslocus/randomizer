@@ -9,16 +9,30 @@ import CollectionPicker from './Picker';
 
 const styles = createStyles({});
 
-const options = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+// const items = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
 
-class Collection extends React.Component <any, any> {
+interface CollectionState {
+    items: Array<string>;
+    current: string;
+}
+
+class Collection extends React.Component <any, CollectionState> {
     public constructor(props) {
         super(props);
-        // TODO add items list to state here
+        const state: CollectionState = {
+            items: [],
+            current: ''
+        };
+
+        this.state = state;
     }
 
-    handleAddItem = (item: string): void => {
-
+    handleAddItem = (event: any): void => {
+        event.preventDefault();
+        console.log('firee')
+        const { items, current } = this.state;
+        items.push(current);
+        this.setState((state) => ({ items, current: '' }));
     }
 
     handleDeleteItem = (item: string): void => {
@@ -26,18 +40,23 @@ class Collection extends React.Component <any, any> {
         // 1D array
     }
 
-    handleItemInput = (item: string): void => {
-        // TODO update logic to add item to list
+    handleInput = (event) => {
+        console.log('handle input', event.target.value)
+        this.setState({ current: event.target.value });
     }
 
     public render() {
+        const { items, current } = this.state;
         return (
             <Grid container
                 justify='space-evenly'>
-                <CollectionList items={options}
+                <CollectionList items={items}
                     onDeleteItem={this.handleDeleteItem}
-                    onItemInput={this.handleItemInput} />
-                <CollectionPicker items={options} />
+                    onItemInput={this.handleInput}
+                    onAddItem={this.handleAddItem}
+                    current={current}
+                    />
+                <CollectionPicker items={items} />
             </Grid>
         );
     }

@@ -3,6 +3,7 @@ import React from 'react';
 import {
     createStyles,
     withStyles,
+    WithStyles,
     Chip,
     Grid
 } from '@material-ui/core';
@@ -13,7 +14,12 @@ const styles = createStyles({
     }
 });
 
-const CollectionListItem = (props: any) => {
+interface CollectionListItemProps extends WithStyles<typeof styles> {
+    item: string;
+    onDeleteItem(item: string): void;
+}
+
+const CollectionListItem = (props: CollectionListItemProps) => {
     const { item, classes, onDeleteItem } = props;
     return(
         <Chip

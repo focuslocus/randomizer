@@ -2,6 +2,7 @@ import React from 'react';
 import {
     createStyles,
     withStyles,
+    WithStyles,
     Modal,
     Typography
  } from '@material-ui/core';
@@ -23,7 +24,12 @@ const styles = createStyles({
     }
 });
 
-const CollectionResult = (props: any) => {
+interface CollectionResultProps extends WithStyles<typeof styles> {
+    open: boolean;
+    picked: string;
+}
+
+const CollectionResult = (props: CollectionResultProps) => {
     const {open, picked, classes} = props;
     return (
         <Modal open={open}>

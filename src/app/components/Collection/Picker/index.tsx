@@ -2,6 +2,7 @@ import React from 'react';
 import {
     createStyles,
     withStyles,
+    WithStyles,
     Fab,
     Grid
 } from '@material-ui/core';
@@ -17,6 +18,10 @@ const handlePickItem = (items: Array<string>, event) => {
     event.preventDefault();
     picked = items[Math.floor(Math.random() * items.length)];
 };
+
+interface CollectionPickerProps extends WithStyles<typeof styles> {
+    items: Array<string>;
+}
 
 const CollectionPicker = (props) => {
     const { classes, items } = props;

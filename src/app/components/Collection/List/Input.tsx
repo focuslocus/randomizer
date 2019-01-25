@@ -2,6 +2,7 @@ import React from 'react';
 import {
     createStyles,
     withStyles,
+    WithStyles,
     Fab,
     Grid,
     Input
@@ -18,16 +19,23 @@ const styles = createStyles({
     formRow: sharedStyles.formRow
 });
 
-const CollectionListInput = (props: any) => {
-    const { classes, onItemInput, onSubmit } = props;
+interface CollectionListInputProps extends WithStyles<typeof styles> {
+    onItemInput(e: any): void;
+    onAddItem(e: any): void;
+    current: string;
+}
+
+const CollectionListInput = (props: CollectionListInputProps) => {
+    const { classes, onItemInput, onAddItem, current } = props;
     return (
         <Grid item
             className={classes.formRow}>
-            <form>
+            <form onSubmit={onAddItem}>
                 <Input type='text'
                     placeholder='Add an option here...'
-                    value=''
-                    onChange={onItemInput} />
+                    value={current}
+                    onChange={onItemInput}
+                    />
                 <Fab className={classes.addFab}
                     type='submit'>
                     <AddIcon />
