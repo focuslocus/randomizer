@@ -16,14 +16,12 @@ const styles = createStyles({
 const CollectionListItem = (props: any) => {
     const { item, classes, onDeleteItem } = props;
     return(
-        <Grid item>
-            <Chip
-                className={props.classes.chips}
-                label={item}
-                variant='outlined'
-                onDelete={() => onDeleteItem(item)}
-            />
-        </Grid>
+        <Chip
+            className={classes.chips}
+            label={item}
+            variant='outlined'
+            onDelete={() => onDeleteItem(item)}
+        />
     );
 
 };

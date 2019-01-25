@@ -26,9 +26,8 @@ const styles = createStyles({
 const CollectionResult = (props: any) => {
     const {open, picked, classes} = props;
     return (
-        <Modal
-            open={open}
-            onClose={!open}>
+        <Modal open={open}>
+            {/*onClose={!open}>*/}
             <div className={classes.modal}>
                 <Typography variant='h6'>
                     {`Congrats: you've been presented with ${picked}`}

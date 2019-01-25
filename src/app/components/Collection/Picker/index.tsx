@@ -21,16 +21,19 @@ const handlePickItem = (items: Array<string>, event) => {
 const CollectionPicker = (props) => {
     const { classes, items } = props;
     return (
-        <Grid item className={classes.formRow}>
-            <Fab
-                disabled={items.length < 2 ? true : false}
-                color='primary'
-                variant='extended'
-                onClick={(e) => handlePickItem(items, e)}>
-                Generate
-            </Fab>
+        <div>
+            <Grid item
+                className={classes.formRow}>
+                <Fab
+                    disabled={items.length < 2 ? true : false}
+                    color='primary'
+                    variant='extended'
+                    onClick={(e) => handlePickItem(items, e)}>
+                    Generate
+                </Fab>
+            </Grid>
             <CollectionResult picked={picked} open={picked === undefined ? false : true} />
-        </Grid>
+        </div>
     );
 };
 

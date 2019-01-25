@@ -2,36 +2,50 @@ import React from 'react';
 import {
     createStyles,
     withStyles,
-    Chip,
     Grid
 } from '@material-ui/core';
 
 import CollectionListInput from './Input';
 import CollectionListItem from './Item';
+import sharedStyles from '../../common/Css';
+
+const styles = createStyles({
+    formRow: sharedStyles.formRow
+});
 
 const CollectionList = (props: any) => {
-    const { items, onDeleteItem, onItemInput } = props;
+    const { items, onDeleteItem, onItemInput, classes } = props;
+    const listComponents = items.reduce((updateditems, currentItem, currentItemIndex) => {
+        const itemsLength = updateditems.length - 1;
+        const itemComponent = <CollectionListItem
+                key={currentItemIndex}
+                item={currentItem}
+                onDeleteItem={onDeleteItem} />;
+        updateditems[itemsLength].length > 2 ? updateditems.push([itemComponent]) : updateditems[itemsLength].push(itemComponent);
+    return updateditems;
+    }, [[]]);
+
     return (
-        <Grid
-            container
+        <Grid container
             justify='space-evenly'>
             <CollectionListInput onItemInput={onItemInput} />
-            <Grid
-                container
+            <Grid container
                 spacing={24}
                 direction='column'
                 alignItems='center'
                 justify='space-evenly'>
-                    {items.map((item: string, index: number) => {
-                        return (<CollectionListItem
+                {listComponents.map((row: string, index: number) => {
+                    return (
+                        <Grid item
                             key={index}
-                            item={item}
-                            onDeleteItem={onDeleteItem} />
-                        );
-                    })}
+                            className={classes.formRow}>
+                                {row}
+                        </Grid>
+                    );
+                })}
             </Grid>
         </Grid>
     );
 };
 
-export default CollectionList;
+export default withStyles(styles)(CollectionList);

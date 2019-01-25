@@ -21,7 +21,8 @@ const styles = createStyles({
 const CollectionListInput = (props: any) => {
     const { classes, onItemInput, onSubmit } = props;
     return (
-        <Grid item className={classes.formRow}>
+        <Grid item
+            className={classes.formRow}>
             <form>
                 <Input type='text'
                     placeholder='Add an option here...'
