@@ -25,15 +25,15 @@ const styles = createStyles({
 });
 
 interface CollectionResultProps extends WithStyles<typeof styles> {
-    open: boolean;
     picked: string;
+    onModalClose(): void;
 }
 
 const CollectionResult = (props: CollectionResultProps) => {
-    const {open, picked, classes} = props;
+    const { picked, classes, onModalClose } = props;
     return (
-        <Modal open={open}>
-            {/*onClose={!open}>*/}
+        <Modal open
+            onClose={onModalClose}>
             <div className={classes.modal}>
                 <Typography variant='h6'>
                     {`Congrats: you've been presented with ${picked}`}

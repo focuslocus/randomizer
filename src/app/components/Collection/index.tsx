@@ -9,8 +9,6 @@ import CollectionPicker from './Picker';
 
 const styles = createStyles({});
 
-// const items = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
-
 interface CollectionState {
     items: Array<string>;
     current: string;
@@ -29,21 +27,20 @@ class Collection extends React.Component <any, CollectionState> {
 
     handleAddItem = (event: any): void => {
         event.preventDefault();
-        console.log('firee')
         const { items, current } = this.state;
         items.push(current);
-        this.setState((state) => ({ items, current: '' }));
+        this.setState(() => ({ items, current: '' }));
     }
 
-    handleDeleteItem = (item: string): void => {
-        // TODO update business logic to handle items as
-        // 1D array
+    handleDeleteItem = (toDelete: string): void => {
+        const newList = this.state.items.filter((item) => item !== toDelete);
+        this.setState({ items: newList });
     }
 
     handleInput = (event) => {
-        console.log('handle input', event.target.value)
         this.setState({ current: event.target.value });
     }
+
 
     public render() {
         const { items, current } = this.state;
