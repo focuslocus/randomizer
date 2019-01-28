@@ -9,7 +9,6 @@ import {
   Typography
 } from "@material-ui/core";
 import { AddToQueue } from "@material-ui/icons";
-// import { OptionsFormComponent } from '../OptionsForm';
 import CollectionList from "../Collection";
 
 const styles = createStyles({
