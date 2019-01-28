@@ -2,21 +2,17 @@ import * as React from 'react';
 import {
   createStyles,
   withStyles,
-  WithStyles,
-  AppBar,
-  Grid,
-  Toolbar,
-  Typography
+  WithStyles
 } from '@material-ui/core';
 import { AddToQueue } from '@material-ui/icons';
-import { OptionsFormComponent } from '../OptionsForm';
+import CollectionList from '../Collection';
 
 const styles = createStyles({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   grow: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   spinner: {
     marginTop: 50
@@ -34,8 +30,11 @@ interface AppShellState {
   deferredPrompt: any;
 }
 
-class AppShellBase extends React.Component<WithStyles<typeof styles>, AppShellState> {
-  constructor (props) {
+class AppShellBase extends React.Component<
+  WithStyles<typeof styles>,
+  AppShellState
+> {
+  constructor(props) {
     super(props);
     const state: AppShellState = {
       showA2HS: false,
@@ -46,57 +45,38 @@ class AppShellBase extends React.Component<WithStyles<typeof styles>, AppShellSt
   }
 
   componentDidMount() {
-    window.addEventListener('beforeinstallprompt', (e) => {
-      console.log('before install happened')
+    window.addEventListener('beforeinstallprompt', e => {
+      console.log('before install happened');
       e.preventDefault();
       this.setState({ showA2HS: true, deferredPrompt: e });
     });
   }
 
   a2hsHandler = (): void => {
-    console.log('handler clicked', this.state)
     if (this.state.deferredPrompt) {
       this.state.deferredPrompt.prompt();
-      this.state.deferredPrompt.userChoice
-        .then((choiceResult) => {
-          if (choiceResult.outcome === 'accepted') {
-            console.log('User accepted the A2HS prompt');
-          } else {
-            console.log('User dismissed the A2HS prompt');
-          }
-          this.setState({ deferredPrompt: null });
-        });
-    }
-  }
-
-  showNotification(): void {
-    if (Notification.permission == 'granted') {
-      navigator.serviceWorker.getRegistration().then(reg => {
-        reg.showNotification('You\'ve been notified', { body: 'of this message' });
+      this.state.deferredPrompt.userChoice.then(choiceResult => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the A2HS prompt');
+        } else {
+          console.log('User dismissed the A2HS prompt');
+        }
+        this.setState({ deferredPrompt: null });
       });
     }
-  }
+  };
 
   render(): React.ReactNode {
     const { classes } = this.props;
     const { showA2HS } = this.state;
     return (
       <div>
-        <AppBar position='static'>
-          <Toolbar>
-            <Typography variant='title' color='inherit' className={classes.grow}>
-              Randomizer
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Grid container>
-          <Grid item xs={12}>
-            <Grid container justify={'center'}>
-              <OptionsFormComponent />
-              <AddToQueue id='a2hs' onClick={this.a2hsHandler} className={showA2HS ? classes.showA2hs : classes.noShowA2hs} />
-            </Grid>
-          </Grid>
-        </Grid>
+        <CollectionList />
+        <AddToQueue
+          id='a2hs'
+          onClick={this.a2hsHandler}
+          className={showA2HS ? classes.showA2hs : classes.noShowA2hs}
+        />
       </div>
     );
   }
