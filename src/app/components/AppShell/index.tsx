@@ -1,15 +1,11 @@
-import * as React from "react";
+import * as React from 'react';
 import {
   createStyles,
   withStyles,
-  WithStyles,
-  AppBar,
-  Grid,
-  Toolbar,
-  Typography
-} from "@material-ui/core";
-import { AddToQueue } from "@material-ui/icons";
-import CollectionList from "../Collection";
+  WithStyles
+} from '@material-ui/core';
+import { AddToQueue } from '@material-ui/icons';
+import CollectionList from '../Collection';
 
 const styles = createStyles({
   root: {
@@ -22,10 +18,10 @@ const styles = createStyles({
     marginTop: 50
   },
   showA2hs: {
-    display: "block"
+    display: 'block'
   },
   noShowA2hs: {
-    display: "none"
+    display: 'none'
   }
 });
 
@@ -57,7 +53,6 @@ class AppShellBase extends React.Component<
   }
 
   a2hsHandler = (): void => {
-    console.log('handler clicked', this.state);
     if (this.state.deferredPrompt) {
       this.state.deferredPrompt.prompt();
       this.state.deferredPrompt.userChoice.then(choiceResult => {
@@ -71,45 +66,17 @@ class AppShellBase extends React.Component<
     }
   };
 
-  showNotification(): void {
-    if (Notification.permission == 'granted') {
-      navigator.serviceWorker.getRegistration().then(reg => {
-        reg.showNotification("You've been notified", {
-          body: 'of this message'
-        });
-      });
-    }
-  }
-
   render(): React.ReactNode {
     const { classes } = this.props;
     const { showA2HS } = this.state;
     return (
       <div>
-        <AppBar position='static'>
-          <Toolbar>
-            <Typography
-              variant='title'
-              color='inherit'
-              className={classes.grow}
-            >
-              Randomizer
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Grid container>
-          <Grid item xs={12}>
-            <Grid container justify={'center'}>
-              <CollectionList />
-              {/* <OptionsFormComponent /> */}
-              <AddToQueue
-                id='a2hs'
-                onClick={this.a2hsHandler}
-                className={showA2HS ? classes.showA2hs : classes.noShowA2hs}
-              />
-            </Grid>
-          </Grid>
-        </Grid>
+        <CollectionList />
+        <AddToQueue
+          id='a2hs'
+          onClick={this.a2hsHandler}
+          className={showA2HS ? classes.showA2hs : classes.noShowA2hs}
+        />
       </div>
     );
   }
