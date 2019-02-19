@@ -4,6 +4,7 @@ import WebpackPwaManifest = require('webpack-pwa-manifest');
 import HtmlWebpackPlugin = require('html-webpack-plugin');
 import WorkboxPlugin = require('workbox-webpack-plugin');
 import ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+import { resolve } from 'path';
 
 module.exports = function(env?: any): webpack.Configuration {
   const entryArray: string[] = ['./src/app/index.tsx'];
@@ -29,19 +30,8 @@ module.exports = function(env?: any): webpack.Configuration {
             loader: 'babel-loader',
             options: {
               cacheDirectory: true,
-              babelrc: false,
-              presets: [
-                [
-                  '@babel/preset-env',
-                  { targets: { browsers: 'last 2 versions' } } // or whatever your project requires
-                ],
-                '@babel/preset-typescript',
-                '@babel/preset-react'
-              ],
-              plugins: [
-                'react-hot-loader/babel',
-                'transform-class-properties'
-              ]
+              babelrc: true,
+              filename: resolve('.babelrc')
             }
           }
         }

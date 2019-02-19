@@ -1,10 +1,4 @@
 module.exports = {
-  "roots": [
-    "./src"
-  ],
-  "transform": {
-    "^.+\\.tsx?$": "ts-jest"
-  },
   "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
   "moduleFileExtensions": [
     "ts",
@@ -14,5 +8,9 @@ module.exports = {
     "json",
     "node"
   ],
-  collectCoverage: true
+  "setupFilesAfterEnv": [
+    "./jest.setup.js"
+  ],
+  "collectCoverage": true,
+  "verbose": true
 }
