@@ -5,7 +5,7 @@ import {
   WithStyles
 } from '@material-ui/core';
 import { AddToQueue } from '@material-ui/icons';
-import CollectionList from '../Collection';
+import Collection from '../Collection/Collection';
 
 const styles = createStyles({
   root: {
@@ -71,7 +71,7 @@ class AppShellBase extends React.Component<
     const { showA2HS } = this.state;
     return (
       <div>
-        <CollectionList />
+        <Collection />
         <AddToQueue
           id='a2hs'
           onClick={this.a2hsHandler}

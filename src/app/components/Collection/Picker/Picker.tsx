@@ -22,7 +22,7 @@ interface CollectionPickerState {
 }
 
 class CollectionPicker extends Component<CollectionPickerProps, CollectionPickerState> {
-    constructor(props) {
+    constructor(props: CollectionPickerProps) {
         super(props);
         const state: CollectionPickerState = {
             picked: null
@@ -31,7 +31,7 @@ class CollectionPicker extends Component<CollectionPickerProps, CollectionPicker
     }
 
 
-    handlePickItem = (event) => {
+    handlePickItem = (event: any) => {
         event.preventDefault();
         const { items } = this.props;
         this.setState({ picked: items[Math.floor(Math.random() * items.length)]});
