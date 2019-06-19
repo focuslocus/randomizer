@@ -1,8 +1,8 @@
-import * as React from "react";
-import { createStyles, withStyles, Grid } from "@material-ui/core";
-import CollectionList from "./List";
-import CollectionPicker from "./Picker";
-import Header from "../Header";
+import * as React from 'react';
+import { createStyles, withStyles, Grid } from '@material-ui/core';
+import CollectionList from './List';
+import CollectionPicker from './Picker';
+import Header from '../Header';
 
 const styles = createStyles({});
 
@@ -16,7 +16,7 @@ class Collection extends React.Component<any, CollectionState> {
     super(props);
     const state: CollectionState = {
       items: [],
-      current: ""
+      current: ''
     };
 
     this.state = state;
@@ -26,7 +26,7 @@ class Collection extends React.Component<any, CollectionState> {
     event.preventDefault();
     const { items, current } = this.state;
     items.push(current);
-    this.setState(() => ({ items, current: "" }));
+    this.setState(() => ({ items, current: '' }));
   };
 
   handleDeleteItem = (toDelete: string): void => {
