@@ -10,7 +10,10 @@ module.exports = function(env?: any): webpack.Configuration {
 
   const isProd = env && env.production;
 
-  if (!isProd) entryArray.push('webpack-hot-middleware/client?path=/__hmr&reload=true&timeout=2000');
+  if (!isProd)
+    entryArray.push(
+      'webpack-hot-middleware/client?path=/__hmr&reload=true&timeout=2000'
+    );
 
   return {
     mode: isProd ? 'production' : 'development',
@@ -38,10 +41,7 @@ module.exports = function(env?: any): webpack.Configuration {
                 '@babel/preset-typescript',
                 '@babel/preset-react'
               ],
-              plugins: [
-                'react-hot-loader/babel',
-                'transform-class-properties'
-              ]
+              plugins: ['react-hot-loader/babel', 'transform-class-properties']
             }
           }
         }
@@ -58,29 +58,29 @@ module.exports = function(env?: any): webpack.Configuration {
         inject: 'body'
       }),
       new WebpackPwaManifest({
-        'short_name': 'Randomizer',
-        'name': 'Randomizer',
-        'icons': [
+        short_name: 'Randomizer',
+        name: 'Randomizer',
+        icons: [
           {
-            'src': './src/app/assets/homescreen_icon_192.png',
-            'size': '192x192'
+            src: './src/app/assets/randomizer.png',
+            size: '192x192'
           },
           {
-            'src': './src/app/assets/homescreen_icon_512.png',
-            'size': '512x512'
+            src: './src/app/assets/randomizer.png',
+            size: '512x512'
           }
         ],
-        'start_url': '/?source=randomizer',
-        'background_color': '#008B8B',
-        'display': 'standalone',
-        'scope': '/',
-        'theme_color': '#00b3b3'
+        start_url: '/?source=randomizer',
+        background_color: '#008B8B',
+        display: 'standalone',
+        scope: '/',
+        theme_color: '#00b3b3'
       }),
       new WorkboxPlugin.InjectManifest({
         swDest: './service-worker.js',
         swSrc: './src/app/sw/index.js',
         include: [/\.html$/, /\.js$/, /\.png$/]
-      }),
+      })
     ],
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.css', 'json']
